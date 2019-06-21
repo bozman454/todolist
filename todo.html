@@ -1,22 +1,50 @@
 <doctype HTML>
 <title>To-Do List</title>
 <h1>To-Do List</h1>
-<body>
+<body onload="getitems()">
 <p>Enter To do stuff below</p><br>
 <input type = "text" id = "in"><br>
 <br><br>
-<input type = "button" onclick="additem();"value = "click to add to list"></button>
+<input type = "button" onclick="additem(document.getElementById('in').value);"value = "click to add to list"></button>
 <br>
 <table id = "out">
 	<tr><th>To Do:</th>
 </tr>
 
 </table>
+
+
+<p id = "test"></p>
 <script>
-function additem(s){		
-document.getElementById('out').innerHTML = document.getElementById('in').value;
+function additem(s){
+var table = document.getElementById('out');
+var numrows = table.rows.length;
+var row = table.insertRow(numrows);
+row.insertCell(0).innerHTML = numrows + ": ";
+var cell = row.insertCell(1);
+cell.innerHTML = s;
 document.getElementById('in').value = "";
 }
+function getitems(){
+	var mysql = require('mysql');
+	var con = mysql.createConnection({
+		host: "localhost",
+		user: "willem",
+		password: "password",
+		database: "td_db",
+	});
+	document.getElementById('test').innerHTML = "connected";
+	con.connect(function(err){
+		if(err) throw err;
+		con.query("SELECT * FROM td_list", function (err, rows, fields){
+			if(err)throw err;
+			for(let i = 0; i < rows.length; i++){
+			var row = rows[i];
+			additem(row.items);
+			}
+	});
+	});
 
+}
 </script>
 </body>
