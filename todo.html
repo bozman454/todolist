@@ -2,6 +2,21 @@
 <title>To-Do List</title>
 <h1>To-Do List</h1>
 <body>
-<p>Enter To do stuff below</p>
+<p>Enter To do stuff below</p><br>
+<input type = "text" id = "in"><br>
+<br><br>
+<input type = "button" onclick="additem();"value = "click to add to list"></button>
+<br>
+<table id = "out">
+	<tr><th>To Do:</th>
+</tr>
 
+</table>
+<script>
+function additem(s){		
+document.getElementById('out').innerHTML = document.getElementById('in').value;
+document.getElementById('in').value = "";
+}
+
+</script>
 </body>
