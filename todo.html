@@ -1,4 +1,4 @@
-<doctype HTML>El
+<doctype HTML>
 <title>To-Do List</title>
 <h1>To-Do List</h1>
 <body>
@@ -22,14 +22,13 @@ if(s.length != 0){
 var table = document.getElementById('out');
 var numrows = table.rows.length;
 var row = table.insertRow(numrows);
-row.id = numrows;
+row.id = numrows ;
 row.insertCell(0).innerHTML = numrows + ": ";
 var cell = row.insertCell(1);
 var button = document.createElement("button");
 button.value  = "-";
-button.tag = numrows;
 	button.addEventListener("click", function(){
-	document.getElementById('out').deleteRow(numrows);
+	document.getElementById('out').deleteRow(row.id);
 	});
 row.insertCell(2).appendChild(button);
 cell.innerHTML = s;
