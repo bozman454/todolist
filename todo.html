@@ -6,6 +6,7 @@
 <input type = "text" id = "in"><br>
 <br><br>
 <input type = "button" onclick="additem(document.getElementById('in').value);"value = "click to add to list"></button>
+<input type = "button" onclick="removeitems();" value = "click to delete">
 <br>
 <table id = "out">
 	<tr><th>To Do:</th>
@@ -13,31 +14,37 @@
 
 </table>
 
-
-<p id = "test"></p>
 <script>
 function additem(s){
-
 if(s.length != 0){
 var table = document.getElementById('out');
 var numrows = table.rows.length;
 var row = table.insertRow(numrows);
-row.id = numrows ;
+row.id = numrows;
 row.insertCell(0).innerHTML = numrows + ": ";
 var cell = row.insertCell(1);
-var button = document.createElement("button");
-button.value  = "-";
-	button.addEventListener("click", function(){
-	document.getElementById('out').deleteRow(row.id);
-	});
-row.insertCell(2).appendChild(button);
+var check = document.createElement("input");
+check.type = "checkbox";
+check.id = "dcheck";
+check.tag = numrows;
+row.insertCell(2).appendChild(check);
 cell.innerHTML = s;
 document.getElementById('in').value = "";
 }
-else{
+}
 
+function removeitems(){
+	var checkboxes = document.querySelectorAll("input[type=checkbox]");
+	var clist = [];
+	for(let item of checkboxes){
+		if(item.checked)
+			clist.push(item.tag)
+	}
+	for(var i =0; i <= clist.length; i++){
+		document.getElementById('out').deleteRow(clist[i]);
+	}
 }
-}
+
 
 </script>
 </body>
