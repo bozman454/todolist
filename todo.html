@@ -1,7 +1,7 @@
-<doctype HTML>
+<doctype HTML>El
 <title>To-Do List</title>
 <h1>To-Do List</h1>
-<body onload="getitems()">
+<body>
 <p>Enter To do stuff below</p><br>
 <input type = "text" id = "in"><br>
 <br><br>
@@ -17,34 +17,28 @@
 <p id = "test"></p>
 <script>
 function additem(s){
+
+if(s.length != 0){
 var table = document.getElementById('out');
 var numrows = table.rows.length;
 var row = table.insertRow(numrows);
+row.id = numrows;
 row.insertCell(0).innerHTML = numrows + ": ";
 var cell = row.insertCell(1);
+var button = document.createElement("button");
+button.value  = "-";
+button.tag = numrows;
+	button.addEventListener("click", function(){
+	document.getElementById('out').deleteRow(numrows);
+	});
+row.insertCell(2).appendChild(button);
 cell.innerHTML = s;
 document.getElementById('in').value = "";
 }
-function getitems(){
-	var mysql = require('mysql');
-	var con = mysql.createConnection({
-		host: "localhost",
-		user: "willem",
-		password: "password",
-		database: "td_db",
-	});
-	document.getElementById('test').innerHTML = "connected";
-	con.connect(function(err){
-		if(err) throw err;
-		con.query("SELECT * FROM td_list", function (err, rows, fields){
-			if(err)throw err;
-			for(let i = 0; i < rows.length; i++){
-			var row = rows[i];
-			additem(row.items);
-			}
-	});
-	});
+else{
 
 }
+}
+
 </script>
 </body>
