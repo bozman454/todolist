@@ -40,19 +40,21 @@ else
 }
 
 function removeitems(){
+	
 	var checkboxes = document.querySelectorAll("input[type=checkbox]");
+	var count =0;
 	var clist = [];
-	for(let item of checkboxes){
+	for(let item of checkboxes){	
 		if(item.checked){
-			clist.push(item.tag)
+			clist.push(count);
 			rowcount--;
 		}
+		count++;
 	}
-
 	
 	for(let i of clist)
 		document.getElementById('out').deleteRow(i);
-	
+
 }
 
 
