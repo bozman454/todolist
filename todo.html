@@ -7,42 +7,52 @@
 <br><br>
 <input type = "button" onclick="additem(document.getElementById('in').value);"value = "click to add to list"></button>
 <input type = "button" onclick="removeitems();" value = "click to delete">
-<br>
-<table id = "out">
-	<tr><th>To Do:</th>
+<br><br>
+<table id = "out">To Do:
+	
+
 </tr>
 
 </table>
 
 <script>
+rowcount = 0;
+
+
 function additem(s){
 if(s.length != 0){
-var table = document.getElementById('out');
-var numrows = table.rows.length;
-var row = table.insertRow(numrows);
-row.id = numrows;
-row.insertCell(0).innerHTML = numrows + ": ";
-var cell = row.insertCell(1);
-var check = document.createElement("input");
-check.type = "checkbox";
-check.id = "dcheck";
-check.tag = numrows;
-row.insertCell(2).appendChild(check);
-cell.innerHTML = s;
-document.getElementById('in').value = "";
+	var table = document.getElementById('out');
+	var row = table.insertRow(rowcount);
+	row.id = rowcount;
+	row.insertCell(0).innerHTML = " - ";
+	var cell = row.insertCell(1);
+	var check = document.createElement("input");
+	check.type = "checkbox";
+	check.id = "dcheck";
+	check.tag = rowcount;
+	row.insertCell(2).appendChild(check);
+	cell.innerHTML = s;
+	document.getElementById('in').value = "";
+	rowcount++;
 }
+else
+	alert("YOU DIDN'T WRITE ANY THING IN THE LIST IDIOT!");
 }
 
 function removeitems(){
 	var checkboxes = document.querySelectorAll("input[type=checkbox]");
 	var clist = [];
 	for(let item of checkboxes){
-		if(item.checked)
+		if(item.checked){
 			clist.push(item.tag)
+			rowcount--;
+		}
 	}
-	for(var i =0; i <= clist.length; i++){
-		document.getElementById('out').deleteRow(clist[i]);
-	}
+
+	
+	for(let i of clist)
+		document.getElementById('out').deleteRow(i);
+	
 }
 
 
