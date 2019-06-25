@@ -1,5 +1,21 @@
 <doctype HTML>
+<head>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+</head>
+<style>
+body{
+margin:auto;
+text-align: center;
+}
+table{
+	margin:auto;
+}
+
+</style>
 <title>To-Do List</title>
+
+<div class="container-fluid">
 <h1>To-Do List</h1>
 <body>
 <p>Enter To do stuff below</p><br>
@@ -9,12 +25,10 @@
 <input type = "button" onclick="removeitems();" value = "click to delete">
 <br><br>
 <table id = "out">To Do:
-	
-
 </tr>
-
 </table>
-
+</body>
+</div>
 <script>
 rowcount = 0;
 
@@ -28,8 +42,6 @@ if(s.length != 0){
 	var cell = row.insertCell(1);
 	var check = document.createElement("input");
 	check.type = "checkbox";
-	check.id = "dcheck";
-	check.tag = rowcount;
 	row.insertCell(2).appendChild(check);
 	cell.innerHTML = s;
 	document.getElementById('in').value = "";
@@ -40,11 +52,9 @@ else
 }
 
 function removeitems(){
-	
 	var checkboxes = document.querySelectorAll("input[type=checkbox]");
 	var count =0;
 	var clist = [];
-
 	for(let item of checkboxes){	
 		if(item.checked){
 			clist.push(count);
